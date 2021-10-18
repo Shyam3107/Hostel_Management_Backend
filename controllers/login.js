@@ -42,7 +42,7 @@ module.exports.login = async (req, res) => {
       return res.status(400).json({ error: "User or Password is Incorrect" });
 
     const token = jwt.sign(user, process.env.JWT_SECRET_KEY, {
-      expiresIn: "24h",
+      //expiresIn: "24h",
     });
 
     return res.status(200).json({ user, token });

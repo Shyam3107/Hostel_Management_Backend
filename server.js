@@ -9,6 +9,7 @@ const { checkUser } = require("./middlewares/checkUser");
 const { login } = require("./controllers/login");
 const attendanceRoute = require("./controllers/Attendance/route");
 const studentRoute = require("./controllers/Student/route");
+const leaveRoute = require("./controllers/Leave/route");
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -40,3 +41,4 @@ app.get("/", async (req, res) => {
 app.get("/login", login);
 app.use("/attendance", checkUser, attendanceRoute);
 app.use("/student", checkUser, studentRoute);
+app.use("/leave", checkUser, leaveRoute);

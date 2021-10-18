@@ -4,9 +4,11 @@ const attendanceSchema = new mongoose.Schema(
   {
     rollNo: {
       type: String,
+      required: true,
     },
     time: {
       type: Date,
+      required: true,
     },
   },
   { timestamps: true }

@@ -5,6 +5,9 @@ const { handleError } = require("../../utils/utils");
 
 module.exports.addStudent = async (req, res) => {
   try {
+    let user = req.user;
+    if (user.userType !== "ADMIN")
+      return res.status(401).json({ error: "You do Not have Permission" });
     let data = await convertCSVToJSON("students");
 
     data = data.map((val) => {
@@ -31,7 +34,7 @@ module.exports.addStudent = async (req, res) => {
         department: val.department.toUpperCase(),
       };
     });
-    
+
     let insertData = [];
     for await (val of data) {
       let tempData = await Student.findOneAndUpdate(
