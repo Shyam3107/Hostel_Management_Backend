@@ -19,15 +19,29 @@ module.exports.addLeave = [
       if (user.userType !== "STUDENT")
         return res.status(401).json({ error: "You do Not have Permission" });
 
-      let minDate = moment(fromDate).hour(6).minute(0).second(0).toISOString();
-      let maxDate = moment(toDate).hour(19).minute(0).second(0).toISOString();
+      let fromMinDate = moment(fromDate)
+        .hour(6)
+        .minute(0)
+        .second(0)
+        .toISOString();
+      let fromMaxDate = moment(fromDate)
+        .hour(19)
+        .minute(0)
+        .second(0)
+        .toISOString();
+      let toMinDate = moment(toDate).hour(6).minute(0).second(0).toISOString();
+      let toMaxDate = moment(toDate).hour(19).minute(0).second(0).toISOString();
+
+      if (moment(toDate).isBefore(fromDate))
+        return res
+          .status(400)
+          .json({ error: "To Date should be after From Date" });
 
       if (
-        // crosschek the Time
-        moment(fromDate).isBefore(minDate) ||
-        moment(fromDate).isAfter(maxDate) ||
-        moment(toDate).isAfter(maxDate) ||
-        moment(toDate).isBefore(minDate)
+        moment(fromDate).isBefore(fromMinDate) ||
+        moment(fromDate).isAfter(fromMaxDate) ||
+        moment(toDate).isAfter(toMaxDate) ||
+        moment(toDate).isBefore(toMinDate)
       )
         return res
           .status(400)

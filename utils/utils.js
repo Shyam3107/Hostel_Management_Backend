@@ -2,8 +2,7 @@ const { validationResult, body } = require("express-validator");
 const csv = require("csvtojson");
 const path = require("path");
 
-module.exports.convertCSVToJSON = async (fileName) => {
-  const csvFilePath = path.join(__dirname, "../", `/public/${fileName}.csv`);
+module.exports.convertCSVToJSON = async (csvFilePath) => {
   let jsonArray = await csv().fromFile(csvFilePath);
   return jsonArray;
 };

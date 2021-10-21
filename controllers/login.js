@@ -7,13 +7,13 @@ dotenv.config();
 
 const warden = {
   userName: "wardenNit@google.com",
-  password: process.env.WARDEN_PASSWORD,
+  password: md5(process.env.WARDEN_PASSWORD),
   userType: "WARDEN",
 };
 
 const admin = {
   userName: "adminNit&google.com",
-  password: process.env.ADMIN_PASSWORD,
+  password: md5(process.env.ADMIN_PASSWORD),
   userType: "ADMIN",
 };
 
@@ -26,9 +26,9 @@ module.exports.login = async (req, res) => {
     let user;
 
     if (userName == warden.userName) {
-      if (password === warden.password) user = warden;
+      if (encryptPassword === warden.password) user = warden;
     } else if (userName === admin.userName) {
-      if (password === admin.password) user = admin;
+      if (encryptPassword === admin.password) user = admin;
     } else {
       user = await Student.findOne({
         email: userName,

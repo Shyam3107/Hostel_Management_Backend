@@ -14,6 +14,7 @@ const leaveRoute = require("./controllers/Leave/route");
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.json());
+app.use(express.static('public'))
 dotenv.config();
 
 const { PORT } = require("./config/constants");
