@@ -5,7 +5,6 @@ module.exports.checkUser = (req, res, next) => {
   try {
     if (req.headers.authorization) {
       const token = req.headers.authorization.split(" ")[1];
-      console.log("token ", token);
       req.user = jwt.verify(token, process.env.JWT_SECRET_KEY);
       return next();
     }

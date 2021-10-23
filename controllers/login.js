@@ -6,13 +6,13 @@ const { handleError } = require("../utils/utils");
 dotenv.config();
 
 const warden = {
-  userName: "wardenNit@google.com",
+  userName: process.env.WARDEN_EMAIL,
   password: md5(process.env.WARDEN_PASSWORD),
   userType: "WARDEN",
 };
 
 const admin = {
-  userName: "adminNit&google.com",
+  userName: process.env.ADMIN_EMAIL,
   password: md5(process.env.ADMIN_PASSWORD),
   userType: "ADMIN",
 };
