@@ -50,8 +50,8 @@ module.exports.addAttendance = async (req, res) => {
   try {
     const user = req.user;
 
-    // if (user.userType !== "ADMIN")
-    //   return res.status(401).json({ error: "You do Not have Permission" });
+    if (user.userType !== "ADMIN")
+      return res.status(401).json({ error: "You do Not have Permission" });
 
     let data = await convertCSVToJSON(req.file.path);
 

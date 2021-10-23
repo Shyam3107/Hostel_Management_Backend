@@ -43,8 +43,8 @@ module.exports.getStudents = async (req, res) => {
 module.exports.addStudents = async (req, res) => {
   try {
     let user = req.user;
-    // if (user.userType !== "ADMIN")
-    //   return res.status(401).json({ error: "You do Not have Permission" });
+    if (user.userType !== "ADMIN")
+      return res.status(401).json({ error: "You do Not have Permission" });
     let data = await convertCSVToJSON(req.file.path);
 
     data = data.map((val) => {
